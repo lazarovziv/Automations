@@ -30,7 +30,7 @@ for line in lines:
     elif row_counter == 3:
         id = line.strip()
     elif row_counter == 4:
-        browser = line.strip()
+        browser = line.strip().lower()
 
 if row_counter == 0 or args.username or args.password or args.id:
     # TODO: add validation check for credentials
