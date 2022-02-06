@@ -48,7 +48,7 @@ if row_counter == 0 or args.username or args.password or args.id:
     username = args.username
     password = args.password
     id = args.id
-    browser = args.browser
+    browser = args.browser.lower()
 
 # if user wants to print credentials to screen
 if args.print:
@@ -57,13 +57,13 @@ if args.print:
     print(f"ID: {id}")
 
 if browser:
-    if browser == 'chrome' or browser == 'Chrome':
+    if browser == 'chrome':
         driver = webdriver.Chrome()
-    elif browser == 'safari' or browser == 'Safari':
+    elif browser == 'safari':
         driver = webdriver.Safari()
-    elif browser == 'firefox' or browser == 'Firefox' or browser == 'FireFox':
+    elif browser == 'firefox':
         driver = webdriver.Firefox()
-    elif browser == 'edge' or browser == 'Edge':
+    elif browser == 'edge':
         driver = webdriver.Edge()
     else:
         print('Please choose a valid browser! (Chrome, Safari, Firefox, Edge)')
