@@ -1,6 +1,7 @@
 # Automations
 Just a bunch of scripts that'll help make things easier..
 
+For login.py (Open University of Israel login page):
 For the best and fastest use, inside the directory where the login.py file is, create a .txt file named "credentials.txt" (no quotes).
 In the first line type your username (case sensitive).
 In the second line type your password.
