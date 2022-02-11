@@ -14,28 +14,14 @@ parser.add_argument('-b', '--browser')
 parser.add_argument('-i', '--id')
 parser.add_argument('-u', '--username')
 parser.add_argument('-p', '--password')
-parser.add_argument('-s', '--print', action='store_true')
+parser.add_argument('-s', '--print', action='store_true', default=True)
 args = parser.parse_args()
 
-# write to file
-credentials_file_read = open(f"{os.getcwd()}/credentials.txt", 'r')
-lines = credentials_file_read.readlines()
-row_counter = 0
-for line in lines:
-    row_counter += 1
-    if row_counter == 1:
-        username = line.strip()
-    elif row_counter == 2:
-        password = line.strip()
-    elif row_counter == 3:
-        id = line.strip()
-    elif row_counter == 4:
-        browser = line.strip().lower()
-
-if row_counter == 0 or args.username or args.password or args.id:
+if not os.path.isfile(f"{os.getcwd()}/credentials.txt"):
+    print('Creating credentials.txt...')
     # TODO: add validation check for credentials
-    if not args.id or not args.username or not args.password:
-        print('Please enter a username, password and id credentials.')
+    if not args.id or not args.username or not args.password or not args.browser:
+        print('Please enter a browser of choice, username, password and id credentials.')
         quit()
 
     credentials_file_write = open('credentials.txt', 'w')
@@ -49,6 +35,21 @@ if row_counter == 0 or args.username or args.password or args.id:
     password = args.password
     id = args.id
     browser = args.browser.lower()
+
+# read to file
+credentials_file_read = open(f"{os.getcwd()}/credentials.txt", 'r')
+lines = credentials_file_read.readlines()
+row_counter = 0
+for line in lines:
+    row_counter += 1
+    if row_counter == 1:
+        username = line.strip()
+    elif row_counter == 2:
+        password = line.strip()
+    elif row_counter == 3:
+        id = line.strip()
+    elif row_counter == 4:
+        browser = line.strip().lower()
 
 # if user wants to print credentials to screen
 if args.print:
@@ -81,7 +82,7 @@ login_form_button_element.click()
 iframe = driver.find_element(By.XPATH, "//*[@id='openu_myop_plugin_apps_iframeId']")
 driver.switch_to.frame(iframe)
 
-username_element = WebDriverWait(driver, timeout=7).until(
+username_element = WebDriverWait(driver, timeout=15).until(
     EC.presence_of_element_located(
         (By.XPATH, "//fieldset//input[@id='p_user']")
     )
