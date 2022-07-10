@@ -51,6 +51,10 @@ for line in lines:
     elif row_counter == 4:
         browser = line.strip().lower()
 
+if id == '' or username == '' or password == '' or browser == '':
+    print('Please enter a browser of choice, username, password and id in the credentials.txt file.')
+    quit()
+
 # if user wants to print credentials to screen
 if args.print:
     print(f"Username: {username}")
